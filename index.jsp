@@ -61,15 +61,13 @@
 <div id="YST" style="width:600px; height:700px;border:dashed 2px #ccc;text-align: center;left: 500px;position:absolute">
     <h2><a href="adminUser">用户管理</a><br><br>
 <a href="getMyOrder">订单管理</a><br><br><a href="admin_jingdian.jsp">发布景点</a><br><br>
-<a href="admin_jiudian.jsp">发布酒店</a><br><br><a href="admin_meishi.jsp">发布美食</a><br>
 <br><hr></h2>
     <h2 style="color: red;">管理员须知</h2>
     <p align="center" style="color: red;font-size: 20px">关于管理，有几点注意事项，想到了随时更新： <br>
 1、不要清理[已注销]的小组成员和长期无人回复的水贴，将其留到小组扩容时有用； <br>
 2、删贴请尽可能详细注明删除理由，以方便出现投诉时倒查并提示被删帖的组员注意； <br>
-3、对于提意见或质问删帖原因的帖子，建议管理员可私下豆油进行沟通，耐心解释。尽量不要在组内公开的吵架。对于无理取闹、胡搅蛮缠的组员可将其直接永久封禁； <br>
-4、请各位管理员不要擅自修改“小组介绍”下的内容； <br>
-5、请暂勿进行小组删帖指引（下表）规定内容以外的操作。 </p>
+3、对于提意见或质问删帖原因的帖子，建议管理员可私下豆油进行沟通，耐心解释。尽量不要在组内公开的吵架。对于无理取闹、胡搅蛮缠的组员可将其直接永久封禁；
+</p>
 </div>
 </body>
 
