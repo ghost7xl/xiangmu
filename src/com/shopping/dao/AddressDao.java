@@ -1,4 +1,4 @@
-package com.shopping.dao;
+﻿package com.shopping.dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import com.shopping.pojo.County;
 import com.shopping.pojo.Province;
 
 public interface AddressDao {
-	// 获取所有的省
+	// 获取所有的省.
 	List<Province> getProvinceList();
 
 	// 获取所有的市
