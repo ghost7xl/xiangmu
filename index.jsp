@@ -62,11 +62,129 @@
     <h2><a href="adminUser">用户管理</a><br><br>
 <a href="getMyOrder">订单管理</a><br><br><a href="admin_jingdian.jsp">发布景点</a><br><br>
 <br><hr></h2>
-    <h2 style="color: red;">管理员须知</h2>
-    <p align="center" style="color: red;font-size: 20px">关于管理，有几点注意事项，想到了随时更新： <br>
-1、不要清理[已注销]的小组成员和长期无人回复的水贴，将其留到小组扩容时有用； <br>
-2、删贴请尽可能详细注明删除理由，以方便出现投诉时倒查并提示被删帖的组员注意； <br>
-3、对于提意见或质问删帖原因的帖子，建议管理员可私下豆油进行沟通，耐心解释。尽量不要在组内公开的吵架。对于无理取闹、胡搅蛮缠的组员可将其直接永久封禁；
+#include<stdio.h>
+#include"string.h"
+
+#define WORDNUM 65535 // max word number
+#define WORDLENGTH 15 // word max length
+#define PRINTWORDNUM 15 //out put max word number
+
+char differentword[WORDNUM][WORDLENGTH]={0};//different word info
+int differentCount[WORDNUM];//equal word number
+int iIndex = 0;//current file word total number
+int iWordCount =0;//current file different word number
+void GetWordInfo(FILE *fpRead);
+void SetWordList(char word[WORDLENGTH]);
+void OrderWordList();
+void OutPutWordList();
+void DealWithWord()
+{
+    FILE *fpRead;
+    if((fpRead = fopen("C:/Users/Administrator/Desktop/word.txt", "r")) == NULL)
+    {
+       printf("Cannot read file %s\n", "word.txt");
+       return;
+    }
+    GetWordInfo(fpRead);
+    OrderWordList();
+    OutPutWordList();
+}
+void GetWordInfo(FILE *fpRead)
+{
+    int jIndex = 0;
+    int i = 0;
+    char ch;
+    char word[WORDLENGTH]={0};
+    while((ch=fgetc(fpRead))!=EOF)
+    {
+       //putchar(ch);
+       if ((ch >= 65 && ch <=90) ||(ch >= 97 && ch <=122))
+       {
+            if (jIndex < WORDLENGTH)
+            {
+             word[jIndex] = ch;
+             jIndex ++;
+            }
+       }
+       else
+       {
+            if (jIndex != 0)
+            {
+             SetWordList(word);
+             jIndex = 0;
+             iIndex ++;
+            }
+       }
+    } 
+}
+void SetWordList(char word[WORDLENGTH])
+{
+    int i;
+    int iEqual = 0;
+    if (iIndex == 0)
+    {
+       strcpy(differentword[0],word); 
+       differentCount[0] = 0;
+       iWordCount ++;
+    }
+    for (i = 0; i < iWordCount; i ++)
+    {
+       if (strcmp(differentword[i],word) == 0)
+       {
+        differentCount[i] ++;
+        iEqual = 1;
+       }
+    }
+    if (iEqual == 0)
+    {
+       strcpy(differentword[iWordCount],word);
+       differentCount[iWordCount] ++;
+       iWordCount ++;
+    }
+    for (i = 0; i <WORDLENGTH; i ++)
+    {
+       word[i] = '\0';
+    }
+}
+void OrderWordList()
+{
+    int iCurrent = 0;
+    int i,j,tempValue;
+    char wordTemp[WORDLENGTH]={0};
+    for (i = 0; i < iWordCount; i ++)
+    {  
+       iCurrent = i;
+       for (j = i + 1; j < iWordCount; j ++)
+       {
+        if (differentCount[iCurrent] < differentCount[j])
+        {
+         iCurrent = j;
+        }
+       } 
+       if (iCurrent != i)
+       {
+        tempValue = differentCount[iCurrent];
+        differentCount[iCurrent] = differentCount[i];
+        differentCount[i] = tempValue;
+        strcpy(wordTemp,differentword[iCurrent]);
+        strcpy(differentword[iCurrent],differentword[i]); 
+        strcpy(differentword[i],wordTemp); 
+       }
+    }
+}
+void OutPutWordList()
+{
+    int i;
+    for (i = 0; i < iWordCount && i < PRINTWORDNUM; i ++)
+    {
+       printf("%s %d\n", differentword[i], differentCount[i]);
+    }
+}
+int main(int argc, char* argv[])
+{
+    DealWithWord();
+    getchar();
+}
 </p>
 </div>
 </body>
